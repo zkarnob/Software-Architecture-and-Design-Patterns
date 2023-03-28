@@ -1,0 +1,77 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.software.architecture.and.design.patterns;
+
+/**
+ *
+ * @author ZawaduL kariM ArnoB
+ */
+
+/*
+
+/*
+ liskov_20_03_2023
+
+
+Liskov Substitution Principle (LSP), which is one of the SOLID principles. According to the LSP, subtypes must be interchangeable with their base types. In other words, subclass objects should be able to be used in the same way as superclass objects without causing unexpected behavior.
+The Bike class overrides the setSpeed method from its superclass Vehicle in this code and throws an exception if the speed exceeds 60 km/h. As a result, the LSP is violated because a Bike object behaves differently than a Vehicle object.
+*/
+
+
+ class Vehicle {
+    private int speed;
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+}
+
+class Car extends Vehicle {
+    private int maxSpeed;
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+}
+
+ class Bike extends Vehicle {
+    private int numGears;
+
+    public void setNumGears(int numGears) {
+        this.numGears = numGears;
+    }
+
+    public int getNumGears() {
+        return numGears;
+    }
+
+    public void checkSpeedLimit(int speed) {
+        if (speed > 60) {
+            throw new IllegalArgumentException("Bikes cannot go faster than 60 km/h");
+        }
+    }
+
+    @Override
+    public void setSpeed(int speed) {
+        checkSpeedLimit(speed);
+        super.setSpeed(speed);
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Bike bike = new Bike();
+        bike.checkSpeedLimit(70); 
+        bike.setSpeed(30);
+        int speed = bike.getSpeed(); // speed will be 30
+    }
+}
