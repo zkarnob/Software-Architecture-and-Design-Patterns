@@ -1,0 +1,27 @@
+
+
+1. Single Responsibility Principle (SRP):
+   - Each class has a single responsibility:
+     - `Account` class handles account-related functionalities (deposit and withdraw).
+     - `Transaction` interface defines the contract for transaction types.
+     - `DepositTransaction` and `WithdrawTransaction` classes implement specific transaction types.
+     - `BankService` class acts as an intermediary to perform transactions on the account.
+
+2. Open/Closed Principle (OCP):
+   - The code is open for extension and closed for modification.
+   - The `Transaction` interface allows for new transaction types to be added without modifying the existing classes.
+   - For example, if you want to add a new transaction type, you can create a new class that implements the `Transaction` interface without modifying the existing `BankService` or `Account` classes.
+
+3. **Liskov Substitution Principle (LSP)**:
+   - The `DepositTransaction` and `WithdrawTransaction` classes are substitutable for the `Transaction` interface.
+   - This means that any instance of `DepositTransaction` or `WithdrawTransaction` can be used interchangeably with `Transaction`, without affecting the correctness of the program.
+
+4. **Interface Segregation Principle (ISP)**:
+   - The `Transaction` interface is small and focuses on a specific contract for transactions (the `execute` method).
+   - There are no unnecessary methods in the interface that might not be used by all implementations.
+
+5. **Dependency Inversion Principle (DIP)**:
+   - The `BankService` class depends on the `Transaction` interface rather than specific transaction implementations.
+   - This allows the `BankService` to be flexible and work with any class that implements the `Transaction` interface, promoting loose coupling.
+
+Overall, the code follows SOLID principles effectively by promoting single responsibility, extensibility, substitutability, interface segregation, and dependency inversion. These principles enhance the maintainability, flexibility, and reusability of the codebase.
